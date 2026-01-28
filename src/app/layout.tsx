@@ -1,5 +1,5 @@
-import { TDSMobileAITProvider } from '@toss/tds-mobile-ait';
 import './globals.css';
+import { RootProviders } from './providers';
 
 export default function RootLayout({
   children,
@@ -9,10 +9,8 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body>
-        <TDSMobileAITProvider>
-          {children} 
-        </TDSMobileAITProvider>
-       </body>
+        <RootProviders>{children}</RootProviders>
+      </body>
     </html>
   );
 }
