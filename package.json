@@ -10,7 +10,8 @@
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "deploy": "ait deploy"
+    "deploy": "ait deploy",
+    "init:app": "tsx scripts/init-app.ts"
   },
   "dependencies": {
     "@apps-in-toss/web-framework": "^1.9.0",
@@ -42,6 +43,7 @@
     "prettier": "^3.8.1",
     "prettier-plugin-tailwindcss": "^0.7.2",
     "tailwindcss": "^4",
+    "tsx": "^4.19.2",
     "typescript": "^5"
   }
 }

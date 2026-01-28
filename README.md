@@ -98,6 +98,39 @@ src/
 5. 필요한 컴포넌트 추가
    - `src/components/ui/`에 추가 UI 컴포넌트 생성
 
+## 🛠 보일러플레이트 프로젝트 이름 변경하기
+
+이 보일러플레이트를 템플릿으로 복사한 뒤, 기본 프로젝트 이름(`ait-nextjs-starter`)을 한 번에 바꾸고 싶다면 아래 명령어를 사용할 수 있습니다.
+
+### 사용 방법
+
+```bash
+# 1. 의존성 설치 (최초 1회만, tsx가 필요합니다)
+pnpm install
+
+# 2. 프로젝트 이름 변경
+pnpm init:app --name <프로젝트이름>
+
+# 예시
+pnpm init:app --name my-awesome-app
+```
+
+### 무엇이 변경되나요?
+
+스크립트는 다음과 같은 작업을 자동으로 수행합니다.
+
+- ✅ `package.json`의 `name` 필드 업데이트
+- ✅ `granite.config.ts`의 `appName` 업데이트
+- ✅ `.env.example`의 `NEXT_PUBLIC_APP_NAME` 주석 해제 및 값 설정
+- ✅ `README.md`의 제목 및 모든 텍스트에서 이름 치환
+- ✅ 프로젝트 내 모든 텍스트 파일에서 `ait-nextjs-starter` → 새 이름으로 치환
+- ✅ `node_modules`, `.git`, `.next`, `dist`, `out`, `.turbo`, `scripts` 디렉터리는 자동으로 제외
+
+### 주의사항
+
+- 프로젝트 이름은 소문자, 숫자, 하이픈(`-`), 언더스코어(`_`)만 사용할 수 있습니다.
+- 실행 후 `granite.config.ts`에서 `brand.displayName`, `brand.primaryColor`, `brand.icon`을 수동으로 설정해주세요.
+
 ## 📜 License
 
 MIT License
