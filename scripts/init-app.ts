@@ -6,8 +6,7 @@
  */
 
 import { readFileSync, writeFileSync, readdirSync, statSync } from 'fs';
-import { join, dirname, basename } from 'path';
-import { execSync } from 'child_process';
+import { join, basename } from 'path';
 
 const OLD_NAME = 'ait-nextjs-starter';
 
@@ -97,14 +96,16 @@ function main(): void {
     process.exit(1);
   }
 
+  const newName: string = name;
+
   console.log(`\n🚀 프로젝트 초기화 시작...`);
-  console.log(`   '${OLD_NAME}' -> '${name}'\n`);
+  console.log(`   '${OLD_NAME}' -> '${newName}'\n`);
 
   // 파일 업데이트
-  updatePackageJson(name);
-  updateGraniteConfig(name);
-  updateEnvExample(name);
-  updateReadme(name);
+  updatePackageJson(newName);
+  updateGraniteConfig(newName);
+  updateEnvExample(newName);
+  updateReadme(newName);
 
   // 모든 텍스트 파일에서 문자열 치환 (node_modules, .git 등 제외)
   console.log(`\n📝 다른 파일들에서 이름 치환 중...`);
@@ -131,7 +132,7 @@ function main(): void {
     );
   }
 
-  function replaceInDirectory(dir: string): void {
+  function replaceInDirectory(dir: string, replacement: string): void {
     try {
       const entries = readdirSync(dir);
       for (const entry of entries) {
@@ -140,14 +141,14 @@ function main(): void {
 
         const stat = statSync(fullPath);
         if (stat.isDirectory()) {
-          replaceInDirectory(fullPath);
+          replaceInDirectory(fullPath, replacement);
         } else if (stat.isFile()) {
           try {
             const content = readFileSync(fullPath, 'utf-8');
             if (content.includes(OLD_NAME)) {
               const newContent = content.replace(
                 new RegExp(OLD_NAME, 'g'),
-                name
+                replacement
               );
               writeFileSync(fullPath, newContent, 'utf-8');
             }
@@ -161,7 +162,7 @@ function main(): void {
     }
   }
 
-  replaceInDirectory(process.cwd());
+  replaceInDirectory(process.cwd(), newName);
   console.log(`✅ 파일 내용 치환 완료`);
 
   console.log(`\n✅ 프로젝트 초기화가 완료되었습니다!`);
